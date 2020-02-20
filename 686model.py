@@ -14,18 +14,18 @@ import numpy as np
 data_n= pd.read_csv("/Users/shirleyhu/Documents/686/686finaldata.csv")
 
 ##plot
-#fig, ax = plt.subplots(figsize=(20,7))
-#ax=sns.countplot(x = "PY", data = data_n,\
-#             palette='Blues_d',alpha=0.7)
-#sns.despine()
-#ax.spines['bottom'].set_visible(False)
-#plt.show()
-#
-#fig, ax = plt.subplots(figsize=(20,10))
-#ax=sns.countplot(y = "PY", data = data_n,\
-#             order = data_n['PY'].value_counts().index, palette='Blues_d',alpha=0.7)
-#sns.despine()
-#ax.spines['bottom'].set_visible(False)
+fig, ax = plt.subplots(figsize=(20,7))
+ax=sns.countplot(x = "PY", data = data_n,\
+             palette='Blues_d',alpha=0.7)
+sns.despine()
+ax.spines['bottom'].set_visible(False)
+plt.show()
+
+fig, ax = plt.subplots(figsize=(20,10))
+ax=sns.countplot(y = "PY", data = data_n,\
+             order = data_n['PY'].value_counts().index, palette='Blues_d',alpha=0.7)
+sns.despine()
+ax.spines['bottom'].set_visible(False)
 ##for p in ax.patches:
 ##    ax.annotate('{:}'.format(p.get_width()), (p.get_width()+20, p.get_y()),va="top")
 ##plt.title("Product Distribution")
@@ -47,9 +47,9 @@ df_edges = pd.DataFrame(list(G.edges), columns=['author1', 'author2'])
 
 ## centrality
 
-#closeCent = nx.closeness_centrality(G)
-#closesort=sorted(closeCent.items(),key=operator.itemgetter(1),reverse=True)
-#df_close = pd.DataFrame(closesort)
+closeCent = nx.closeness_centrality(G)
+closesort=sorted(closeCent.items(),key=operator.itemgetter(1),reverse=True)
+df_close = pd.DataFrame(closesort)
 degree = nx.degree_centrality(G)
 #between = nx.betweenness_centrality(G)
 lst=[]
