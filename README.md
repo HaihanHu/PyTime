@@ -10,3 +10,4 @@
 Variables:
 
 ![image](images/variables.png =250x)
+<img src='images/variables.png' width='200'>
