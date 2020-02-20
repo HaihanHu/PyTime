@@ -27,10 +27,9 @@ from sklearn.linear_model import Lasso,LassoCV
 df= pd.read_csv('/Users/shirleyhu/Documents/686/model2.csv')
 #model1:count of publications > 1, model2:whole, model3: sum1-5 above average
 
+df.fillna(value=0,inplace=True)
 
-#df.fillna(value=0,inplace=True)
-##
-#corr = df.corr()
+corr = df.corr()
 #ax = sns.heatmap(
 #    corr, 
 #    vmin=-1, vmax=1, center=0,
@@ -42,10 +41,8 @@ df= pd.read_csv('/Users/shirleyhu/Documents/686/model2.csv')
 #    rotation=45,
 #    horizontalalignment='right'
 #);
-#
+
 #corr.sort_values(["sum6"], ascending = False, inplace = True)
-#
-#
 #a = pd.DataFrame(corr.sum6)
 #a = a.sort_values('sum6')
 
@@ -54,19 +51,19 @@ y = df['sum6']
 #y = np.log(df['sum6']+1)
 x = df.drop(['author','sum6'],axis=1)
 X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 0)
-#
+
 #plt.figure(figsize = (10,5))#print("skew: ",y.skew())
 #sns.distplot(y)
 
 
 ##plot
-#fig, ax = plt.subplots(figsize=(10,8))
-#ax=sns.countplot(x = "first_year", data = df,\
-#             palette='Blues_d',alpha=0.7)
-#sns.despine()
-#ax.spines['bottom'].set_visible(False)
-#plt.show()
-#
+fig, ax = plt.subplots(figsize=(10,8))
+ax=sns.countplot(x = "first_year", data = df,\
+             palette='Blues_d',alpha=0.7)
+sns.despine()
+ax.spines['bottom'].set_visible(False)
+plt.show()
+
 #fig, ax = plt.subplots(figsize=(10,8))
 #ax=sns.countplot(y = "first_year", data = df,\
 #             order = df['first_year'].value_counts().index, palette='Blues_d',alpha=0.7)
@@ -91,18 +88,17 @@ lr.score(X_test,y_test)
 print ('R^2 is: \n', lr.score(X_test,y_test))
 
 
-# Plot predictions
-#plt.scatter(y_train_lr, y_train, s=10,c = "blue", marker = "o", label = "Training data")
-#plt.scatter(y_test_lr, y_test,s=10, c = "lightgreen", marker = "o", label = "Validation data")
-#plt.title("Linear regression")
-#plt.xlabel("Predicted values")
-#plt.ylabel("Real values")
-#plt.legend(loc = "upper left")
-#plt.plot([0, 30], [0, 30], c = "red")
-#plt.show()
-#
-#
-#
+## Plot predictions
+plt.scatter(y_train_lr, y_train, s=10,c = "blue", marker = "o", label = "Training data")
+plt.scatter(y_test_lr, y_test,s=10, c = "lightgreen", marker = "o", label = "Validation data")
+plt.title("Linear regression")
+plt.xlabel("Predicted values")
+plt.ylabel("Real values")
+plt.legend(loc = "upper left")
+plt.plot([0, 30], [0, 30], c = "red")
+plt.show()
+
+
 ########### RF model ##########
 
 rf = RandomForestRegressor(n_estimators=20, random_state=0)  
@@ -119,18 +115,18 @@ y_test_rf = rf.predict(X_test)
 ##plt.legend(loc = "upper left")
 ##plt.show()
 
-# #Plot predictions
-#plt.scatter(y_train, y_train_rf,s=10, c = "steelblue", marker = "o", label = "Training data")
-#plt.scatter(y_test, y_test_rf,s=10, c = "orangered", marker = "o", label = "Validation data")
-#plt.title("Random Forest Regression")
-#plt.xlabel("Real values")
-#plt.ylabel("Predicted values")
-#plt.legend(loc = "upper left")
-#plt.plot([0, 30], [0, 30], c = 'orange')
-#plt.show()
+##Plot predictions
+plt.scatter(y_train, y_train_rf,s=10, c = "steelblue", marker = "o", label = "Training data")
+plt.scatter(y_test, y_test_rf,s=10, c = "orangered", marker = "o", label = "Validation data")
+plt.title("Random Forest Regression")
+plt.xlabel("Real values")
+plt.ylabel("Predicted values")
+plt.legend(loc = "upper left")
+plt.plot([0, 30], [0, 30], c = 'orange')
+plt.show()
 ##rf.score(X_test,y_test)
 #print ('R^2 is: \n', rf.score(X_test,y_test))
-#
+
 ########### LASSO model ##########
 
 lasso = LassoCV(alphas = [0.0001, 0.0003, 0.0006, 0.001, 0.003, 0.006, 0.01, 0.03, 0.06, 0.1, 
@@ -151,16 +147,16 @@ print("Best alpha :", alpha)
 
 
 lasso = Lasso(alpha = [0.003]).fit(X_train, y_train)
-#
+
 #coef = pd.Series(lasso.coef_, index = X_train.columns)
-##print('Lasso picked'+str(sum(coef != 0 )))
-#
+#print('Lasso picked'+str(sum(coef != 0 )))
+
 #coef.sort_values().plot(kind = "barh")
 #plt.title("Coefficients in the Lasso Model")
   
 y_train_lasso = lasso.predict(X_train)
 y_test_lasso = lasso.predict(X_test)
-#
+
 #plt.scatter(y_train_lasso, y_train,s=10, c = "steelblue", marker = "o", label = "Training data")
 #plt.scatter(y_test_lasso, y_test,s=10, c = "orangered", marker = "o", label = "Validation data")
 #plt.title("Lasso Regression")
@@ -189,22 +185,16 @@ def rmse_cv_test(model):
 #print("RMSE on Test set :", rmse_cv_test(rf).mean())
 
 
-
 ######### RF Features Importance ##########
 
-
-#feature_importances = pd.DataFrame(rf.feature_importances_,
-#                                   index = X_train.columns,
-#                                    columns=['importance']).sort_values('importance',                                                                 
-#                                                                        ascending=True)
-#plt.rcParams["figure.figsize"] = (10,8)
-#feature_importances.plot(kind = "barh")
-#
-#plt.title("Features Importance in the Random Forest Model")
-#
-#plt.show()
-
-
+feature_importances = pd.DataFrame(rf.feature_importances_,
+                                   index = X_train.columns,
+                                    columns=['importance']).sort_values('importance',                                                                 
+                                                                        ascending=True)
+plt.rcParams["figure.figsize"] = (10,8)
+feature_importances.plot(kind = "barh")
+plt.title("Features Importance in the Random Forest Model")
+plt.show()
 
 
 errordf=pd.DataFrame(columns=['train','test'])
