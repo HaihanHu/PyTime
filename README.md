@@ -8,3 +8,4 @@ The main purpose of this project is to find most prominent authors in the field 
 * Predicting the authors future performance based on impact factors
 
 ![image](http://github.com/HaihanHu/PyTime/raw/master/images/variables.png)
+images/variables.png
