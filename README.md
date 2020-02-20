@@ -7,4 +7,4 @@ The main purpose of this project is to find most prominent authors in the field 
 * Using social network analysis methodology to build co-author network and calculate centrality degree of every author
 * Predicting the authors future performance based on impact factors
 
-![image](http://github.com/HaihanHu/PyTime/raw/master/images/variables.png)
+http://github.com/HaihanHu/PyTime/raw/master/images/variables.png
