@@ -7,6 +7,6 @@
 - Using social network analysis methodology to build co-author network and calculate centrality degree of every author
 - Predicting the authors future performance based on impact factors
 
-Variables:
+**_Variables:_**
 
 <img src='images/variables.png' width='700'>
