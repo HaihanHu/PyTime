@@ -9,4 +9,4 @@
 
 Variables:
 
-![image](images/variables.png = 250x)
+![image](images/variables.png =250x)
