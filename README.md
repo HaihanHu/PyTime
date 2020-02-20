@@ -9,4 +9,4 @@
 
 Variables:
 
-<img src='images/variables.png' width='300'>
+<img src='images/variables.png' width='600'>
